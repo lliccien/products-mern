@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - data:/data/db
+    networks:
+      - backend
+  cache:
+    image: redis
+    ports:
+      - '6379:6379'
+    volumes: 
+      - cache:/data
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  data:
+    driver: local
+  cache:
+    driver: local
